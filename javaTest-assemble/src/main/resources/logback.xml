@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<property resource="spring/projectName-${spring.profiles.active}.properties" />
+	<contextName>${CONTEXT_NAME}</contextName>
+	<appender name="projectName-schedule-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/projectName.schedule.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/projectName.db.log-%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}---/%n-/%msg%n%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="projectName-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/projectName.all.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/projectName.log-%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}---/%n-/%msg%n%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ***************************************************************** -->
+
+	<!-- STDOUT APENDER -->
+
+	<!-- ***************************************************************** -->
+
+	<if condition='property("os.name").toUpperCase().contains("WINDOWS")'>
+		<then>
+			<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+				<encoder>
+					<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}---/%n-/%msg%n%n</pattern>
+				</encoder>
+			</appender>
+			<root level="DEBUG">
+				<appender-ref ref="STDOUT" />
+			</root>
+			<logger name="com.gzt" level="debug">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			
+			<logger name="org.apache" level="warn">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			
+			<logger name="org.springframework" level="info">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			
+			<logger name="net" level="error">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			<logger name="org.hibernate" level="error">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			
+			<logger name="org.springframework.aop.framework.Cglib2AopProxy" level="error">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			<logger name="org.springframework.aop.framework.CglibAopProxy" level="error">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			
+			<logger name="com.alibaba" level="warn">
+				<appender-ref ref="STDOUT" />
+			</logger>
+			<logger name="ch.qos" level="error">
+				<appender-ref ref="STDOUT" />
+			</logger>
+		</then>
+	</if>
+	
+	<!-- sql start 开启将INFO改为DEBUG就行-->
+	<logger name="java.sql.Statement" level="INFO">
+		<appender-ref ref="projectName-schedule-log" />
+	</logger>
+	<logger name="java.sql.Connection" level="INFO">
+		<appender-ref ref="projectName-schedule-log" />
+	</logger>
+	<logger name="java.sql.PreparedStatement" level="INFO">
+		<appender-ref ref="projectName-schedule-log" />
+	</logger>
+	<!-- sql end -->
+	
+	<root level="info">
+		<appender-ref ref="projectName-log" />
+	</root>
+</configuration>
