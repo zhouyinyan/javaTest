@@ -7,6 +7,11 @@
 	</parent>
 	<artifactId>javaTest-dal</artifactId>
 
+	<properties>
+		<mybatis.generator.configurationFile>src/main/resources/generatorConfig.xml</mybatis.generator.configurationFile>
+		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
@@ -38,8 +43,24 @@
 			<groupId>org.mybatis.generator</groupId>
 			<artifactId>mybatis-generator-core</artifactId>
 		</dependency>
-		
-
-
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.0</version>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

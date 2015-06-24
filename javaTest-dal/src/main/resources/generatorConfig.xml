@@ -5,15 +5,16 @@
 
 <generatorConfiguration>
    
-  <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar" />
-  <context id="easyexchange" targetRuntime="MyBatis3">
+  <classPathEntry location="C:\repository\mysql\mysql-connector-java\5.1.31\mysql-connector-java-5.1.31.jar" />
+  <context id="javaTest" targetRuntime="MyBatis3">
   <property name="javaFileEncoding" value="utf-8"/>
   	
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
-    <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
-    <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
-    <plugin type="com.gzt.dal.mybatis.plugin.CustomModelPlugin"></plugin>
-    
+
+    <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>-->
+
+    <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>-->
+
   	
   	<!-- 关闭注解信息 -->   
   	<commentGenerator>            
@@ -21,30 +22,31 @@
   	</commentGenerator>
   	
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://192.168.1.126:3306/gzt?characterEncoding=UTF8"
+        connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF8"
         userId="root"
-        password="123456">
+        password="">
     </jdbcConnection>
 
     <javaTypeResolver >
       <property name="forceBigDecimals" value="false" />
     </javaTypeResolver>
 
-    <javaModelGenerator targetPackage="com.gzt.dal.mybatis.model" targetProject="gzt-dal\src\main\java">
+    <javaModelGenerator targetPackage="com.test.dal.mybatis.model" targetProject="src/main/java">
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="mybatis.xml" targetProject="gzt-dal\src\main\resources">
+    <sqlMapGenerator targetPackage="mybatis.xml" targetProject="src/main/resources">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.gzt.dal.mybatis.maps" targetProject="gzt-dal\src\main\java">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.test.dal.mybatis.maps" targetProject="src/main/java">
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
-    <table tableName="trade_info" >
-    	<generatedKey column="trade_id" sqlStatement="SELECT UUID()"/>
+    <table tableName="user" >
+    	<generatedKey column="id" sqlStatement="SELECT UUID()"/>
     </table>
+
   </context>
 </generatorConfiguration>
