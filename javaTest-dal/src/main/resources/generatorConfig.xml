@@ -10,11 +10,9 @@
   <property name="javaFileEncoding" value="utf-8"/>
   	
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
-
-    <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>-->
-
-    <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>-->
-
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+    <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+    <!-- 更多插件有待添加 -->
   	
   	<!-- 关闭注解信息 -->   
   	<commentGenerator>            
