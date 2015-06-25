@@ -57,6 +57,12 @@
 						<artifactId>mybatis-generator-core</artifactId>
 						<version>1.3.2</version>
 					</dependency>
+					<!-- 计划使用这个包里面的plugin，但是测试存在问题，有时间在看看 -->
+					<!--<dependency>-->
+						<!--<groupId>net.javaforge.mybatis.generator</groupId>-->
+						<!--<artifactId>mybatis-generator-plugins</artifactId>-->
+						<!--<version>1.0.1</version>-->
+					<!--</dependency>-->
 				</dependencies>
 				<!-- 集成到maven的生命週期中，生成目標文件的路徑存在問題 -->
 				<!-- 先通過mvn mybatis-generator:generate手工生成 -->

@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration({"classpath*:spring/*.xml"})
 public class BaseSpringContextTest {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     static {
         System.setProperty("spring.profiles.active", "dev");
