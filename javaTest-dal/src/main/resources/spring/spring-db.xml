@@ -10,7 +10,7 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 ">
 
-	<context:property-placeholder location="classpath*:spring/projectName-${spring.profiles.active}.properties" />
+	<context:property-placeholder location="classpath*:spring/javaTest-${spring.profiles.active}.properties" />
     <!-- JNDI方式配置数据源 -->
     <!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> <property name="jndiName" value="${jndiName}"></property> </bean> -->
 
