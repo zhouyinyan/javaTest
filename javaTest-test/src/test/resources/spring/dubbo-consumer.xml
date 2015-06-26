@@ -13,6 +13,6 @@
     <dubbo:consumer check="true"/>
 
     <!-- demoservice -->
-    <dubbo:reference id="demoService" interface="com.test.java.facade.api.demoservice.DemoService" version="1.0" url="dubbo://localhost:20080"/>
+    <dubbo:reference id="demoService" interface="com.test.java.facade.api.demoservice.DemoService" version="1.0" url="dubbo://localhost:20880"/>
 
 </beans>
