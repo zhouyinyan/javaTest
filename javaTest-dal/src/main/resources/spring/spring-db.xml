@@ -48,7 +48,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
         <property name="logAbandoned" value="true" />
         <!-- 监控数据库 -->
         <!-- <property name="filters" value="stat" /> -->
-        <property name="filters" value="mergeStat,start" />
+        <property name="filters" value="mergeStat,slf4j" />
+        <!--<property name="connectionProperties" value="druid.stat.slowSqlMillis=5000" />-->
     </bean>
     
     <!-- ========================================分隔线========================================= -->

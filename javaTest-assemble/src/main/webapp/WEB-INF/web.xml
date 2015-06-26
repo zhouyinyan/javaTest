@@ -62,16 +62,31 @@
     <!--</filter-mapping>-->
 
     <servlet>
-        <servlet-name>projectName</servlet-name>
+        <servlet-name>javaTest</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/projectName-config.xml</param-value>
+            <param-value>/WEB-INF/javaTest-config.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>projectName</servlet-name>
+        <servlet-name>javaTest</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+    <servlet-name>DruidStatView</servlet-name>
+    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    <init-param>
+        <param-name>resetEnable</param-name>
+        <param-value>false</param-value>
+    </init-param>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

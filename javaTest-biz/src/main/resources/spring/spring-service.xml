@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:aop="http://www.springframework.org/schema/aop"
-	   xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
-	   default-lazy-init="true">
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                        http://code.alibabatech.com/schema/dubbo
+        				http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="true">
+
+    <!-- dubbo配置 -->
+    <!-- Application name 初始化ApplicationConfig owner填写邮箱名 -->
+    <dubbo:application name="javaTest" owner="xxx" organization="xxx" logger="slf4j"/>
+
+    <!-- registry address, used for service to register itself 初始化RegistryConfig -->
+    <!--<dubbo:registry protocol="zookeeper" address="${dubbo.registry.zookeeper}"-->
+                    <!--file="${dubbo.registry.cache.file}" />-->
+
+    <!-- 因还未搭建zookeeper,暂时用Multicast注册中心 -->
+    <dubbo:registry address="multicast://224.5.6.7:1234" />
+
+    <!-- expose this service through dubbo protocol, through port 20880 ProtocolConfig -->
+    <dubbo:protocol name="dubbo" port="20080" threads="200" register="${dubbo.provider.register}"/>
+
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 提供者默认配置 选用快速失败策略 -->
+    <dubbo:provider timeout="${dubbo.provider.timeout}" cluster="${dubbo.provider.cluster}" loadbalance="${dubbo.reference.loadbalance}"/>
+
+    <dubbo:consumer check="${dubbo.consumer.check}"/>
 
 
 </beans>
