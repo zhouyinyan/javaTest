@@ -28,7 +28,7 @@
     <!-- 提供者默认配置 选用快速失败策略 -->
     <dubbo:provider timeout="${dubbo.provider.timeout}" cluster="${dubbo.provider.cluster}" loadbalance="${dubbo.reference.loadbalance}"/>
 
-    <dubbo:consumer check="${dubbo.consumer.check}"/>
+    <dubbo:consumer check="${dubbo.consumer.check}" filter="performanceFilter"/>
 
 
 </beans>

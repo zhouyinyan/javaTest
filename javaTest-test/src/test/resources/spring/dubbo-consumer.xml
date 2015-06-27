@@ -10,7 +10,7 @@
     <!-- dubbo配置 -->
     <dubbo:application name="javaTest-dubbo-consumer-test" logger="slf4j"/>
 
-    <dubbo:consumer check="true"/>
+    <dubbo:consumer check="true"  filter="performanceFilter"/>
 
     <!-- demoservice -->
     <dubbo:reference id="demoService" interface="com.test.java.facade.api.demoservice.DemoService" version="1.0" url="dubbo://localhost:20880"/>

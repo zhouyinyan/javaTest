@@ -3,23 +3,40 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 	<property resource="spring/javaTest-${spring.profiles.active:-online}.properties" />
 	<contextName>${CONTEXT_NAME}</contextName>
-	<appender name="projectName-schedule-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_PATH}/projectName.schedule.log</file>
+	<appender name="javaTest-schedule-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/javaTest.schedule.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_PATH}/projectName.db.log-%d{yyyy-MM-dd}</fileNamePattern>
+			<fileNamePattern>${LOG_PATH}/javaTest.db.log-%d{yyyy-MM-dd}</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}---/%n-/%msg%n%n</pattern>
 		</encoder>
 	</appender>
 	
-	<appender name="projectName-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_PATH}/projectName.all.log</file>
+	<appender name="javaTest-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/javaTest.all.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_PATH}/projectName.log-%d{yyyy-MM-dd}</fileNamePattern>
+			<fileNamePattern>${LOG_PATH}/javaTest.log-%d{yyyy-MM-dd}</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}---/%n-/%msg%n%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 性能日志APPEND -->
+	<appender name="PERFORMANCE_APPENDER"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<file>${LOG_PATH}/javaTest-performance.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/javaTest-performance.log-%d{yyyy-MM-dd}.%i
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{25}:%L-%msg%n</pattern>
 		</encoder>
 	</appender>
 	
@@ -85,8 +102,13 @@
 		<appender-ref ref="projectName-schedule-log" />
 	</logger>
 	<!-- sql end -->
+
+	<!-- 性能日志器。只打印到性能日志文件，不向上传递.使用：LoggerFactory.getLogger("PERFORMANCE_LOGGER"); -->
+	<logger name="PERFORMANCE_LOGGER" additivity="false">
+		<appender-ref ref="PERFORMANCE_APPENDER" />
+	</logger>
 	
 	<root level="info">
-		<appender-ref ref="projectName-log" />
+		<appender-ref ref="javaTest-log" />
 	</root>
 </configuration>
